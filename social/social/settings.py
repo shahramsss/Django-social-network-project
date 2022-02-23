@@ -141,4 +141,4 @@ EMAIL_HOST_USER= 'shahramsss1987@gamil.com'
 EMAIL_PORT= 587
 EMAIL_HOST_PASSWORD= 'ocjpnwnrrujztzrm'
 EMAIL_USE_TLS= True
-# DEFAULT_FROM_EMAIL=  
+DEFAULT_FROM_EMAIL= 'my web site' 

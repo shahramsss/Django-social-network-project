@@ -7,6 +7,54 @@
 
 {% endif %}
 <p>{{post.user.username}} - {{post.updated | date:"Y-M-D"}}</p>
-<p>{{post.body}}</p>
+<p>{{post.body}}</p><hr>
+
+<!-- form create comment -->
+
+{% if request.user.is_authenticated %}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="send" class="btn btn-primary mb-4">
+    </form>
+{% else %}
+    <p class="alert alert-danger">Only logged in users can comment!</p>
+{% endif %}
+
+
+<!-- show comments -->
+<p>{{comments.count}} comments</p>
+{% for comment in comments %}
+<div class="card bg-dark text-white">
+    <p class="card-header">{{comment.user}} | {{comment.created|timesince}}</p>
+    <p class="card-body">{{comment.body}} </p>
+
+    <!-- send reply -->
+    {% if request.user.is_authenticated %}
+    
+    <!-- like btn -->
+    <a href="{% url 'home:post_like' post.id %}" class=  "{% if can_like %} disabled {% endif %} btn btn-primary col-md-2 ml-4">like {{post.like_count}}</a>
+
+    <form action="{% url 'home:post_reply' post.id comment.id %}" method="post" class="m-3 p-2 ">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="reply" class="btn btn-primary ">
+
+    </form>
+    {% endif%}
+
+    <!-- show replies -->
+    {% with replaies=comment.rcomments.all %}
+    {% for reply in replaies %}
+        <p class="bg-primary p-3 m-2">{{reply.user}} <br>{{reply.body}}</p>
+    {% endfor %}
+    {% endwith %}
+
+</div>
+
+{% empty %}
+<p>No comment yet!</p>
+
+{% endfor %}
 
 {% endblock content %}

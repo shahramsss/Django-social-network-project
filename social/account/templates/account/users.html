@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>users page ... </h3>
+
+      
+
+  <div class="card">
+        {% for user in users  %}
+
+        <a class="card-body" href="{% url 'account:user_posts' user.id%}">{{user.username }}</a>        
+        {% endfor %}
+    </div>
+
+{% endblock content %}
+<h3>register page ... </h3>

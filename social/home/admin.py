@@ -1,8 +1,5 @@
-from email.mime import image
-import imp
-from re import search
 from django.contrib import admin
-from .models import Post
+from .models import Post , Comment , Vote
 
 
 @admin.register(Post)
@@ -14,3 +11,10 @@ class PostAdmin(admin.ModelAdmin):
     raw_id_fields = ('user',)
 
 # admin.site.register(Post, PostAdmin)
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['user','post','created','is_replay']
+    raw_id_fields = ('user','post','replay')
+
+admin.site.register(Vote)

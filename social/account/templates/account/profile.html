@@ -3,7 +3,9 @@
 <h3>profile page ... </h3>
 
 <h3>name: {{request.user.username}} </h3>
+
 <a class="btn btn-primary mb-2" href="{% url 'home:post_create'%}">create post</a>        
+<a class="btn btn-info mb-2" href="{% url 'account:edit_user' %}">edit profile</a>        
 
   <div class="card">
         {% for post in posts  %}
