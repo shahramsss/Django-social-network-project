@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>profile page ... </h3>
+
+<h3>name: {{request.user.username}} </h3>
+<a class="btn btn-primary mb-2" href="{% url 'home:post_create'%}">create post</a>        
+
+  <div class="card">
+        {% for post in posts  %}
+
+        <a class="card-body" href="{{post.get_absolute_url}}">{{post.body | truncatechars:8}}</a>        
+        {% endfor %}
+    </div>
+
+{% endblock content %}
+<h3>register page ... </h3>

@@ -6,9 +6,19 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
+
+      {% if request.user.is_authenticated %}
+
         <a class="nav-link active" aria-current="page" href="{% url 'home:home' %}">Home</a>
-        <a class="nav-link active" aria-current="page" href="{% url 'account:register_account' %}">regiter</a>
-        
+        <a class="nav-link active" aria-current="page" href="{% url 'account:profile_account' %}">{{ request.user.username}}</a>
+        <a class="nav-link active" aria-current="page" href="{% url 'account:profile_account' %}">Profile</a>
+        <a class="nav-link active" aria-current="page" href="{% url 'account:logout_account' %}">Logout</a>
+      
+      {% else %}
+
+        <a class="nav-link active" aria-current="page" href="{% url 'account:register_account' %}">Regsiter</a>
+        <a class="nav-link active" aria-current="page" href="{% url 'account:login_account' %}">Login</a>
+        {% endif %}
         
       </div>
     </div>
